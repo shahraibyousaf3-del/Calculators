@@ -57,7 +57,6 @@
             flex-direction: column;
         }
 
-        /* ── Header (Redesigned for mobile compactness) ─────── */
         .site-header {
             background: var(--card-bg);
             border-bottom: 1px solid var(--border);
@@ -115,7 +114,6 @@
             color: var(--accent);
         }
 
-        /* Mobile-specific header optimizations */
         @media (max-width: 600px) {
             .site-header {
                 height: 48px;
@@ -164,7 +162,6 @@
             }
         }
 
-        /* ── Main Container ────────────── */
         .main-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -187,7 +184,6 @@
             font-weight: 400;
         }
 
-        /* ── Calculator Grid ───────────── */
         .calculators-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -203,7 +199,6 @@
             }
         }
 
-        /* ── Card ──────────────────────── */
         .calculator-card {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
@@ -247,7 +242,6 @@
             content: '💰';
         }
 
-        /* ── Form Elements ─────────────── */
         .form-group {
             display: flex;
             flex-direction: column;
@@ -303,7 +297,6 @@
             cursor: pointer;
         }
 
-        /* ── Toggle Group (Yes/No) ─────── */
         .toggle-label-text {
             font-weight: 600;
             font-size: 0.875rem;
@@ -348,7 +341,6 @@
             outline-offset: 2px;
         }
 
-        /* ── Conditional Section ───────── */
         .conditional-section {
             max-height: 0;
             opacity: 0;
@@ -372,7 +364,6 @@
             padding-top: 4px;
         }
 
-        /* ── Calculate Button ──────────── */
         .btn-calculate {
             display: inline-flex;
             align-items: center;
@@ -420,7 +411,6 @@
             opacity: 1;
         }
 
-        /* ── Output Area ──────────────── */
         .output-area {
             max-height: 0;
             opacity: 0;
@@ -516,7 +506,6 @@
             color: var(--text-secondary);
         }
 
-        /* ── Info Block ────────────────── */
         .info-block {
             background: var(--card-bg);
             border-radius: var(--radius-lg);
@@ -566,7 +555,6 @@
             line-height: 1.5;
         }
 
-        /* ── Footer ────────────────────── */
         .site-footer {
             background: var(--card-bg);
             border-top: 1px solid var(--border);
@@ -581,7 +569,6 @@
             color: var(--text-secondary);
         }
 
-        /* ── Additional Responsive Fine-Tuning (non-header) ── */
         @media (max-width: 600px) {
             .main-container {
                 padding: 20px 14px 32px;
@@ -646,11 +633,10 @@
 </head>
 <body>
 
-    <!-- ═══════════════ HEADER (Compact Redesign) ═══════════════ -->
     <header class="site-header">
         <div class="site-branding">
-            <span class="brand-main">Harbour<span>&amp;</span>Gale</span>
-            <span class="brand-sub">Solicitors</span>
+            <span class="brand-main">Employment Claim Tools</span>
+            <span class="brand-sub"></span>
         </div>
         <nav>
             <ul class="header-nav">
@@ -661,31 +647,24 @@
         </nav>
     </header>
 
-    <!-- ═══════════════ MAIN ═══════════════ -->
     <main class="main-container" id="calculators">
         <h1 class="page-title">UK Employment Tribunal Calculators</h1>
         <p class="page-subtitle">Estimate your claim deadline and potential compensation — free, confidential, no sign-up required.</p>
 
-        <!-- ── Calculators Grid ──────────── -->
         <div class="calculators-grid">
 
-            <!-- ╔══════════════════════════════════════╗ -->
-            <!-- ║  CALCULATOR 1 — Tribunal Deadline   ║ -->
-            <!-- ╚══════════════════════════════════════╝ -->
             <section class="calculator-card" id="deadline-calc" aria-labelledby="deadline-heading">
                 <h2 class="card-heading" id="deadline-heading">
                     <span class="icon-circle cal-icon" aria-hidden="true"></span>
                     Tribunal Deadline Calculator
                 </h2>
 
-                <!-- Date of dismissal -->
                 <div class="form-group">
                     <label for="dismissal-date">Date of dismissal</label>
                     <span class="hint">The effective date your employment ended</span>
                     <input type="date" id="dismissal-date" required>
                 </div>
 
-                <!-- ACAS toggle -->
                 <div>
                     <span class="toggle-label-text">Did you contact ACAS for early conciliation?</span>
                     <div class="toggle-group" id="acas-toggle-group" role="radiogroup" aria-label="Did you contact ACAS?">
@@ -694,7 +673,6 @@
                     </div>
                 </div>
 
-                <!-- Conditional: ACAS dates -->
                 <div class="conditional-section" id="acas-dates-section">
                     <div class="conditional-section-inner">
                         <div class="form-group">
@@ -710,13 +688,11 @@
                     </div>
                 </div>
 
-                <!-- Calculate button -->
                 <button class="btn-calculate" id="btn-deadline" type="button">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     Calculate my deadline
                 </button>
 
-                <!-- Output area -->
                 <div class="output-area" id="deadline-output">
                     <div class="output-inner">
                         <div class="output-headline" id="deadline-headline"></div>
@@ -726,43 +702,35 @@
                 </div>
             </section>
 
-            <!-- ╔══════════════════════════════════════════╗ -->
-            <!-- ║  CALCULATOR 2 — Compensation Estimate  ║ -->
-            <!-- ╚══════════════════════════════════════════╝ -->
             <section class="calculator-card" id="compensation-calc" aria-labelledby="comp-heading">
                 <h2 class="card-heading" id="comp-heading">
                     <span class="icon-circle comp-icon" aria-hidden="true"></span>
                     Unfair Dismissal Compensation Estimate
                 </h2>
 
-                <!-- Age -->
                 <div class="form-group">
                     <label for="age-dismissal">Age at dismissal</label>
                     <input type="number" id="age-dismissal" placeholder="e.g. 35" min="16" max="100" step="1" required>
                 </div>
 
-                <!-- Years of service -->
                 <div class="form-group">
                     <label for="years-service">Years of full service</label>
                     <span class="hint">Continuous employment with this employer (max 20 for calculation)</span>
                     <input type="number" id="years-service" placeholder="e.g. 5" min="0" max="50" step="1" required>
                 </div>
 
-                <!-- Gross weekly pay -->
                 <div class="form-group">
                     <label for="gross-weekly">Gross weekly pay (£)</label>
                     <span class="hint">Before tax, including regular overtime and bonuses</span>
                     <input type="number" id="gross-weekly" placeholder="e.g. 600" min="0" step="0.01" required>
                 </div>
 
-                <!-- Net weekly pay -->
                 <div class="form-group">
                     <label for="net-weekly">Net weekly pay (£)</label>
                     <span class="hint">Take-home pay after tax and NI</span>
                     <input type="number" id="net-weekly" placeholder="e.g. 480" min="0" step="0.01" required>
                 </div>
 
-                <!-- New job toggle -->
                 <div>
                     <span class="toggle-label-text">Have you found a new job since?</span>
                     <div class="toggle-group" id="newjob-toggle-group" role="radiogroup" aria-label="Found a new job?">
@@ -771,7 +739,6 @@
                     </div>
                 </div>
 
-                <!-- Discrimination toggle -->
                 <div>
                     <span class="toggle-label-text">Do you believe this involved discrimination?</span>
                     <div class="toggle-group" id="discrim-toggle-group" role="radiogroup" aria-label="Involved discrimination?">
@@ -780,7 +747,6 @@
                     </div>
                 </div>
 
-                <!-- Conditional: Severity dropdown -->
                 <div class="conditional-section" id="severity-section">
                     <div class="conditional-section-inner">
                         <div class="form-group">
@@ -794,22 +760,18 @@
                     </div>
                 </div>
 
-                <!-- Calculate button -->
                 <button class="btn-calculate" id="btn-compensation" type="button">
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
                     Calculate my estimate
                 </button>
 
-                <!-- Output area -->
                 <div class="output-area" id="compensation-output">
                     <div class="output-inner" id="compensation-output-inner">
-                        <!-- Populated by JS -->
                     </div>
                 </div>
             </section>
         </div>
 
-        <!-- ═══════════════ INFO / SEO BLOCK ═══════════════ -->
         <article class="info-block" id="guide">
             <h2>Understanding Tribunal Deadlines and Compensation</h2>
 
@@ -830,19 +792,21 @@
                 date. Always keep your ACAS certificate safe — it contains the key dates you will need.
             </p>
 
-            <h3>Upcoming Changes: 2026 / 2027</h3>
+            <h3>Employment Rights Act 2025 — Current Reforms</h3>
             <div class="highlight-note">
-                <strong>Important:</strong> Under proposed reforms in the Employment Rights Bill, the limitation period for tribunal
-                claims is expected to <strong>extend from 3 months to 6 months</strong>, and the ACAS early conciliation window will
-                also be lengthened. These changes are anticipated to take effect during 2026 or 2027. Until then, the current
-                3-month rule (with ACAS adjustments) remains in force. Always check the latest position before relying on any deadline.
+                <strong>Important:</strong> The Employment Rights Act 2025 received Royal Assent in December 2025 and is now law.
+                It is being implemented in phases through 2026 and 2027. Key changes include: the statutory cap on the unfair
+                dismissal compensatory award is due to be <strong>abolished from 1 January 2027</strong>, and a planned extension
+                of tribunal time limits (expected to move from 3 months to 6 months) is part of the reforms but <strong>has not
+                yet come into force</strong>. Until then, the current 3-month-less-one-day rule (with ACAS adjustments) still
+                applies. Always check the latest position before relying on any deadline or compensation estimate.
             </div>
 
             <h3>Basic Award vs Compensatory Award vs Vento Bands</h3>
             <p>Unfair dismissal compensation is made up of several components:</p>
             <ul>
                 <li><strong>Basic Award</strong> — A formula-based statutory payment calculated from your age, length of service, and gross weekly pay (capped). It mirrors the statutory redundancy calculation: 0.5 week's pay per year under age 22, 1 week per year aged 22–40, and 1.5 weeks per year aged 41+.</li>
-                <li><strong>Compensatory Award</strong> — Designed to cover your actual financial loss (lost earnings, benefits, pension contributions). This is subject to a statutory cap (currently the lower of £105,707 or 52 weeks' gross pay for most claims). The estimate depends heavily on individual circumstances, including whether you have found new employment.</li>
+                <li><strong>Compensatory Award</strong> — Designed to cover your actual financial loss (lost earnings, benefits, pension contributions). This is subject to a statutory cap: currently the lower of £123,543 or 52 weeks' gross pay (for dismissals on or after 6 April 2026). The estimate depends heavily on individual circumstances, including whether you have found new employment.</li>
                 <li><strong>Vento Bands</strong> — These apply specifically to <em>injury to feelings</em> in discrimination cases. They are split into three tiers: lower band (one-off or minor incidents), middle band (serious or continuing conduct), and upper band (ongoing significant impact). The bands are updated annually and are separate from — and in addition to — the basic and compensatory awards.</li>
             </ul>
             <p>
@@ -853,7 +817,6 @@
         </article>
     </main>
 
-    <!-- ═══════════════ FOOTER ═══════════════ -->
     <footer class="site-footer" id="footer-disclaimer">
         <p>
             <strong>Disclaimer:</strong> These calculators provide general estimates only and do not constitute legal advice.
@@ -863,9 +826,10 @@
         </p>
     </footer>
 
-    <!-- ═══════════════ SCRIPTS (unchanged) ═══════════════ -->
     <script>
         (function() {
+            window.scrollTo(0, 0);
+
             const dismissalDateInput = document.getElementById('dismissal-date');
             const acasToggleGroup = document.getElementById('acas-toggle-group');
             const acasDatesSection = document.getElementById('acas-dates-section');
@@ -981,7 +945,6 @@
                 deadlineHeadline.innerHTML = `Your estimated deadline is <span class="date-highlight">${formatDateUK(finalDeadline)}</span>`;
                 deadlineExplanation.innerHTML = explanation;
                 deadlineOutput.classList.add('visible');
-                setTimeout(() => { deadlineOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 150);
             }
 
             function calculateCompensation() {
@@ -998,62 +961,76 @@
                 if (isNaN(grossWeekly) || grossWeekly < 0) { alert('Please enter a valid gross weekly pay.'); return; }
                 if (isNaN(netWeekly) || netWeekly < 0) { alert('Please enter a valid net weekly pay.'); return; }
 
-                const WEEKLY_PAY_CAP = 700;
-                const COMPENSATORY_CAP = 105707;
+                const WEEKLY_PAY_CAP = 751;
+                const COMPENSATORY_CAP = 123543;
                 const MAX_SERVICE_YEARS = 20;
+                const VENTO_LOWER = { low: 1300, high: 12600, label: 'Lower Vento band (one-off/minor)' };
+                const VENTO_MIDDLE = { low: 12600, high: 37700, label: 'Middle Vento band (serious/continuing)' };
+                const VENTO_UPPER = { low: 37700, high: 62900, label: 'Upper Vento band (ongoing significant)' };
 
                 const cappedGrossWeekly = Math.min(grossWeekly, WEEKLY_PAY_CAP);
                 const cappedYears = Math.min(yearsService, MAX_SERVICE_YEARS);
-                let basicAward = 0;
-                const serviceYears = cappedYears;
-                const ageAtStart = age - serviceYears;
-                let remainingYears = serviceYears;
 
-                if (age > 40) {
-                    const yearsOver40 = Math.min(remainingYears, age - 40);
-                    basicAward += yearsOver40 * 1.5 * cappedGrossWeekly;
-                    remainingYears -= yearsOver40;
-                }
-                if (remainingYears > 0 && age > 21) {
-                    const middleYears = Math.min(remainingYears, (age <= 40 ? remainingYears : Math.max(0, 40 - Math.max(ageAtStart, 22))));
-                    if (middleYears > 0) {
-                        basicAward += middleYears * 1.0 * cappedGrossWeekly;
-                        remainingYears -= middleYears;
+                let basicAward = 0;
+                let ageDuringYear = age;
+                for (let i = 0; i < cappedYears; i++) {
+                    if (ageDuringYear >= 41) {
+                        basicAward += 1.5 * cappedGrossWeekly;
+                    } else if (ageDuringYear >= 22) {
+                        basicAward += 1.0 * cappedGrossWeekly;
+                    } else {
+                        basicAward += 0.5 * cappedGrossWeekly;
                     }
-                }
-                if (remainingYears > 0) {
-                    basicAward += remainingYears * 0.5 * cappedGrossWeekly;
+                    ageDuringYear--;
                 }
                 basicAward = Math.round(basicAward);
 
-                let estimatedWeeks = foundNewJob ? Math.min(26, Math.max(4, Math.round(yearsService * 2))) : Math.min(52, Math.max(13, Math.round(yearsService * 4)));
+                let estimatedWeeks = foundNewJob
+                    ? Math.min(26, Math.max(4, Math.round(yearsService * 2)))
+                    : Math.min(52, Math.max(13, Math.round(yearsService * 4)));
                 let compensatoryLow = Math.round(netWeekly * estimatedWeeks * 0.7);
                 let compensatoryHigh = Math.round(netWeekly * estimatedWeeks * 1.3);
                 compensatoryLow = Math.min(compensatoryLow, COMPENSATORY_CAP);
                 compensatoryHigh = Math.min(compensatoryHigh, COMPENSATORY_CAP);
 
-                const ventoBands = {
-                    lower: { low: 1200, high: 11700, label: 'Lower Vento band (one-off/minor)' },
-                    middle: { low: 11700, high: 35200, label: 'Middle Vento band (serious/continuing)' },
-                    upper: { low: 35200, high: 58700, label: 'Upper Vento band (ongoing significant)' },
-                };
                 let ventoLow = 0, ventoHigh = 0, ventoLabel = '';
-                if (isDiscrimination && severity && ventoBands[severity]) {
-                    ventoLow = ventoBands[severity].low;
-                    ventoHigh = ventoBands[severity].high;
-                    ventoLabel = ventoBands[severity].label;
+                if (isDiscrimination && severity) {
+                    const bandMap = { lower: VENTO_LOWER, middle: VENTO_MIDDLE, upper: VENTO_UPPER };
+                    const band = bandMap[severity];
+                    if (band) {
+                        ventoLow = band.low;
+                        ventoHigh = band.high;
+                        ventoLabel = band.label;
+                    }
                 }
 
                 const totalLow = basicAward + compensatoryLow + ventoLow;
                 const totalHigh = basicAward + compensatoryHigh + ventoHigh;
 
                 let html = '<div class="output-figures">';
-                html += `<div class="output-row"><span class="label">Basic Award (statutory formula)</span><span class="value">${formatGBP(basicAward)}</span></div>`;
-                html += `<div class="output-row"><span class="label">Compensatory Award (estimated range)</span><span class="value">${formatGBPRange(compensatoryLow, compensatoryHigh)}</span></div>`;
+
+                html += `<div class="output-row">
+                    <span class="label">Basic Award (statutory formula)</span>
+                    <span class="value">${formatGBP(basicAward)}</span>
+                </div>`;
+
+                html += `<div class="output-row">
+                    <span class="label">Compensatory Award (rough indicative range only)</span>
+                    <span class="value">${formatGBPRange(compensatoryLow, compensatoryHigh)}</span>
+                </div>`;
+                html += `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:-6px;margin-bottom:4px;">Indicative only — actual loss depends on individual circumstances and mitigation.</p>`;
+
                 if (isDiscrimination && ventoLow > 0) {
-                    html += `<div class="output-row"><span class="label">Injury to Feelings — ${ventoLabel}</span><span class="value">${formatGBPRange(ventoLow, ventoHigh)}</span></div>`;
+                    html += `<div class="output-row">
+                        <span class="label">Injury to Feelings — ${ventoLabel}</span>
+                        <span class="value">${formatGBPRange(ventoLow, ventoHigh)}</span>
+                    </div>`;
                 }
-                html += `<div class="output-row total-row"><span class="label">Total Estimated Range</span><span class="value">${formatGBPRange(totalLow, totalHigh)}</span></div></div>`;
+
+                html += `<div class="output-row total-row">
+                    <span class="label">Total Estimated Range</span>
+                    <span class="value">${formatGBPRange(totalLow, totalHigh)}</span>
+                </div></div>`;
 
                 let tagsHtml = '';
                 if (isDiscrimination) tagsHtml += '<span class="output-tag">🏷️ Includes Vento band</span> ';
@@ -1063,9 +1040,10 @@
                 if (tagsHtml) html += `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">${tagsHtml}</div>`;
 
                 html += '<p class="output-disclaimer">This estimate is for guidance only. Actual awards depend on tribunal discretion, mitigation efforts, and specific case facts. Statutory caps and Vento bands are reviewed annually.</p>';
+                html += '<p class="output-disclaimer" style="margin-top:0;font-style:normal;color:var(--text-muted);font-size:0.72rem;">Rates as at 6 April 2026</p>';
+
                 compensationOutputInner.innerHTML = html;
                 compensationOutput.classList.add('visible');
-                setTimeout(() => { compensationOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 150);
             }
 
             acasToggleGroup.addEventListener('click', function(e) {
@@ -1088,8 +1066,10 @@
                 toggleConditionalSection(severitySection, btn.getAttribute('data-value') === 'yes');
                 compensationOutput.classList.remove('visible');
             });
+
             btnDeadline.addEventListener('click', calculateDeadline);
             btnCompensation.addEventListener('click', calculateCompensation);
+
             dismissalDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
             acasStartDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
             acasCertDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
@@ -1097,8 +1077,11 @@
                 el.addEventListener('change', () => compensationOutput.classList.remove('visible'));
                 el.addEventListener('input', () => compensationOutput.classList.remove('visible'));
             });
+
             toggleConditionalSection(acasDatesSection, getToggleValue(acasToggleGroup) === 'yes');
             toggleConditionalSection(severitySection, getToggleValue(discrimToggleGroup) === 'yes');
+
+            window.addEventListener('load', () => { window.scrollTo(0, 0); });
         })();
     </script>
 </body>
