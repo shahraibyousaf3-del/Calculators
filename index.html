@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -945,6 +946,7 @@
                 deadlineHeadline.innerHTML = `Your estimated deadline is <span class="date-highlight">${formatDateUK(finalDeadline)}</span>`;
                 deadlineExplanation.innerHTML = explanation;
                 deadlineOutput.classList.add('visible');
+                setTimeout(() => { deadlineOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             }
 
             function calculateCompensation() {
@@ -1044,6 +1046,7 @@
 
                 compensationOutputInner.innerHTML = html;
                 compensationOutput.classList.add('visible');
+                setTimeout(() => { compensationOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             }
 
             acasToggleGroup.addEventListener('click', function(e) {
@@ -1086,3 +1089,4 @@
     </script>
 </body>
 </html>
+```
