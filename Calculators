@@ -1,0 +1,1236 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UK Employment Tribunal Calculators | Deadline &amp; Compensation Estimator</title>
+    <meta name="description" content="Free UK employment tribunal calculators — estimate your claim deadline and unfair dismissal compensation. Understand ACAS early conciliation, Vento bands, and the 3-month limitation period.">
+
+    <style>
+        :root {
+            --bg: #f4f6f9;
+            --card-bg: #ffffff;
+            --text-primary: #1a1d2e;
+            --text-secondary: #4a4d5c;
+            --text-muted: #6e7180;
+            --accent: #315fbf;
+            --accent-hover: #254a9e;
+            --accent-light: #e8effb;
+            --accent-ring: #a3bbeb;
+            --border: #e1e4ec;
+            --border-focus: #bcc7dd;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.06), 0 2px 6px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.08), 0 3px 10px rgba(0, 0, 0, 0.05);
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 18px;
+            --radius-xl: 22px;
+            --font-stack: 'Inter', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-bounce: 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        body {
+            font-family: var(--font-stack);
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Header ─────────────────────── */
+        .site-header {
+            background: var(--card-bg);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+        .site-branding {
+            font-weight: 700;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+        .site-branding span {
+            color: var(--accent);
+        }
+        .header-nav {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+        .header-nav a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color var(--transition-fast);
+        }
+        .header-nav a:hover {
+            color: var(--accent);
+        }
+
+        /* ── Main Container ────────────── */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px 48px;
+            width: 100%;
+            flex: 1;
+        }
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+        .page-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            font-weight: 400;
+        }
+
+        /* ── Calculator Grid ───────────── */
+        .calculators-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 48px;
+        }
+        @media (max-width: 900px) {
+            .calculators-grid {
+                grid-template-columns: 1fr;
+            }
+            .page-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        /* ── Card ──────────────────────── */
+        .calculator-card {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 28px 30px 32px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            transition: box-shadow var(--transition-smooth), border-color var(--transition-smooth);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .calculator-card:hover {
+            box-shadow: var(--shadow-lg);
+            border-color: #d0d5df;
+        }
+        .card-heading {
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-heading .icon-circle {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            color: var(--accent);
+        }
+        .card-heading .icon-circle.cal-icon::before {
+            content: '📅';
+        }
+        .card-heading .icon-circle.comp-icon::before {
+            content: '💰';
+        }
+
+        /* ── Form Elements ─────────────── */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group label {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            letter-spacing: -0.005em;
+        }
+        .form-group .hint {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        input[type="date"],
+        input[type="number"],
+        select {
+            font-family: var(--font-stack);
+            font-size: 0.95rem;
+            padding: 11px 14px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            background: #fafbfc;
+            color: var(--text-primary);
+            transition: all var(--transition-fast);
+            width: 100%;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        input[type="date"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 4px rgba(49, 95, 191, 0.08);
+            background: #fff;
+        }
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236e7180' d='M1.41 0L6 4.58 10.59 0 12 1.41l-6 6-6-6z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
+            cursor: pointer;
+        }
+
+        /* ── Toggle Group (Yes/No) ─────── */
+        .toggle-label-text {
+            font-weight: 600;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            letter-spacing: -0.005em;
+            margin-bottom: 2px;
+        }
+        .toggle-group {
+            display: inline-flex;
+            background: #eef1f5;
+            border-radius: var(--radius-sm);
+            padding: 3px;
+            gap: 2px;
+            align-self: flex-start;
+        }
+        .toggle-btn {
+            padding: 9px 20px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-stack);
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .toggle-btn.active {
+            background: #fff;
+            color: var(--accent);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .toggle-btn:hover:not(.active) {
+            color: var(--text-secondary);
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .toggle-btn:focus-visible {
+            outline: 2px solid var(--accent-ring);
+            outline-offset: 2px;
+        }
+
+        /* ── Conditional Section ───────── */
+        .conditional-section {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-smooth), opacity 0.35s ease, margin 0.35s ease;
+            margin-top: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .conditional-section.visible {
+            max-height: 350px;
+            opacity: 1;
+            margin-top: 4px;
+            overflow: visible;
+        }
+        .conditional-section-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding-top: 4px;
+        }
+
+        /* ── Calculate Button ──────────── */
+        .btn-calculate {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 13px 28px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-family: var(--font-stack);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            letter-spacing: -0.005em;
+            align-self: flex-start;
+            -webkit-tap-highlight-color: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-calculate:hover {
+            background: var(--accent-hover);
+            box-shadow: 0 4px 14px rgba(49, 95, 191, 0.3);
+            transform: translateY(-1px);
+        }
+        .btn-calculate:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(49, 95, 191, 0.2);
+        }
+        .btn-calculate:focus-visible {
+            outline: 3px solid var(--accent-ring);
+            outline-offset: 3px;
+        }
+        .btn-calculate::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: inherit;
+            opacity: 0;
+            transition: opacity var(--transition-fast);
+        }
+        .btn-calculate:active::after {
+            opacity: 1;
+        }
+
+        /* ── Output Area ──────────────── */
+        .output-area {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height var(--transition-bounce), opacity 0.45s ease, margin 0.4s ease;
+            margin-top: 0;
+            background: #f8fafd;
+            border-radius: var(--radius-md);
+            border: 1px solid #e4eaf3;
+        }
+        .output-area.visible {
+            max-height: 700px;
+            opacity: 1;
+            margin-top: 8px;
+            overflow: visible;
+        }
+        .output-inner {
+            padding: 22px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .output-headline {
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        .output-headline .date-highlight {
+            color: var(--accent);
+            background: var(--accent-light);
+            padding: 3px 10px;
+            border-radius: 6px;
+            white-space: nowrap;
+        }
+        .output-explanation {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+        .output-figures {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .output-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 8px 0;
+            border-bottom: 1px solid #e8ecf2;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .output-row:last-child {
+            border-bottom: none;
+            font-weight: 700;
+            font-size: 1.05rem;
+        }
+        .output-row .label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .output-row .value {
+            font-weight: 600;
+            color: var(--text-primary);
+            text-align: right;
+        }
+        .output-row.total-row .label {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        .output-row.total-row .value {
+            font-size: 1.1rem;
+            color: var(--accent);
+        }
+        .output-disclaimer {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            font-style: italic;
+            line-height: 1.4;
+            margin-top: 6px;
+        }
+        .output-tag {
+            display: inline-block;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 4px 12px;
+            font-size: 0.78rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* ── Info Block ────────────────── */
+        .info-block {
+            background: var(--card-bg);
+            border-radius: var(--radius-lg);
+            padding: 36px 34px;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+            margin-bottom: 32px;
+        }
+        .info-block h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+        .info-block h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+            letter-spacing: -0.005em;
+        }
+        .info-block p {
+            font-size: 0.925rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .info-block ul {
+            margin: 8px 0 16px 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+        .info-block ul li {
+            margin-bottom: 6px;
+        }
+        .info-block .highlight-note {
+            background: #fef9e7;
+            border-left: 3px solid #e6b422;
+            padding: 12px 16px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.875rem;
+            color: #6b5518;
+            margin: 16px 0;
+            line-height: 1.5;
+        }
+
+        /* ── Footer ────────────────────── */
+        .site-footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border);
+            padding: 18px 24px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+        .site-footer strong {
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        /* ── Responsive Fine-Tuning ────── */
+        @media (max-width: 600px) {
+            .main-container {
+                padding: 20px 14px 32px;
+            }
+            .calculator-card {
+                padding: 20px 16px 24px;
+                gap: 16px;
+            }
+            .card-heading {
+                font-size: 1.1rem;
+            }
+            .btn-calculate {
+                width: 100%;
+                justify-content: center;
+                padding: 14px 20px;
+            }
+            .output-headline {
+                font-size: 1.35rem;
+            }
+            .toggle-btn {
+                padding: 8px 16px;
+                font-size: 0.82rem;
+            }
+            .info-block {
+                padding: 24px 18px;
+            }
+            .info-block h2 {
+                font-size: 1.15rem;
+            }
+            .output-inner {
+                padding: 16px 14px;
+                gap: 10px;
+            }
+            .output-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+            .output-row .value {
+                text-align: left;
+            }
+        }
+        @media (max-width: 380px) {
+            .page-title {
+                font-size: 1.35rem;
+            }
+            .calculator-card {
+                padding: 16px 12px 20px;
+                border-radius: var(--radius-md);
+            }
+            .card-heading {
+                font-size: 1rem;
+                gap: 8px;
+            }
+            .card-heading .icon-circle {
+                width: 32px;
+                height: 32px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ═══════════════ HEADER ═══════════════ -->
+    <header class="site-header">
+        <div class="site-branding">Harbour<span>&amp;</span>Gale Solicitors</div>
+        <nav>
+            <ul class="header-nav">
+                <li><a href="#calculators">Calculators</a></li>
+                <li><a href="#guide">Guide</a></li>
+                <li><a href="#footer-disclaimer">Disclaimer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ═══════════════ MAIN ═══════════════ -->
+    <main class="main-container" id="calculators">
+        <h1 class="page-title">UK Employment Tribunal Calculators</h1>
+        <p class="page-subtitle">Estimate your claim deadline and potential compensation — free, confidential, no sign-up required.</p>
+
+        <!-- ── Calculators Grid ──────────── -->
+        <div class="calculators-grid">
+
+            <!-- ╔══════════════════════════════════════╗ -->
+            <!-- ║  CALCULATOR 1 — Tribunal Deadline   ║ -->
+            <!-- ╚══════════════════════════════════════╝ -->
+            <section class="calculator-card" id="deadline-calc" aria-labelledby="deadline-heading">
+                <h2 class="card-heading" id="deadline-heading">
+                    <span class="icon-circle cal-icon" aria-hidden="true"></span>
+                    Tribunal Deadline Calculator
+                </h2>
+
+                <!-- Date of dismissal -->
+                <div class="form-group">
+                    <label for="dismissal-date">Date of dismissal</label>
+                    <span class="hint">The effective date your employment ended</span>
+                    <input type="date" id="dismissal-date" required>
+                </div>
+
+                <!-- ACAS toggle -->
+                <div>
+                    <span class="toggle-label-text">Did you contact ACAS for early conciliation?</span>
+                    <div class="toggle-group" id="acas-toggle-group" role="radiogroup" aria-label="Did you contact ACAS?">
+                        <button class="toggle-btn" data-value="yes" aria-pressed="false">Yes</button>
+                        <button class="toggle-btn active" data-value="no" aria-pressed="true">No</button>
+                    </div>
+                </div>
+
+                <!-- Conditional: ACAS dates -->
+                <div class="conditional-section" id="acas-dates-section">
+                    <div class="conditional-section-inner">
+                        <div class="form-group">
+                            <label for="acas-start-date">Date ACAS conciliation started</label>
+                            <span class="hint">The date you first contacted ACAS</span>
+                            <input type="date" id="acas-start-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="acas-cert-date">Date ACAS issued your certificate</label>
+                            <span class="hint">The date on your ACAS early conciliation certificate</span>
+                            <input type="date" id="acas-cert-date">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculate button -->
+                <button class="btn-calculate" id="btn-deadline" type="button">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Calculate my deadline
+                </button>
+
+                <!-- Output area -->
+                <div class="output-area" id="deadline-output">
+                    <div class="output-inner">
+                        <div class="output-headline" id="deadline-headline"></div>
+                        <p class="output-explanation" id="deadline-explanation"></p>
+                        <p class="output-disclaimer">This is an estimate based on the information you provided. The actual deadline may vary. Always verify with a qualified solicitor.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ╔══════════════════════════════════════════╗ -->
+            <!-- ║  CALCULATOR 2 — Compensation Estimate  ║ -->
+            <!-- ╚══════════════════════════════════════════╝ -->
+            <section class="calculator-card" id="compensation-calc" aria-labelledby="comp-heading">
+                <h2 class="card-heading" id="comp-heading">
+                    <span class="icon-circle comp-icon" aria-hidden="true"></span>
+                    Unfair Dismissal Compensation Estimate
+                </h2>
+
+                <!-- Age -->
+                <div class="form-group">
+                    <label for="age-dismissal">Age at dismissal</label>
+                    <input type="number" id="age-dismissal" placeholder="e.g. 35" min="16" max="100" step="1" required>
+                </div>
+
+                <!-- Years of service -->
+                <div class="form-group">
+                    <label for="years-service">Years of full service</label>
+                    <span class="hint">Continuous employment with this employer (max 20 for calculation)</span>
+                    <input type="number" id="years-service" placeholder="e.g. 5" min="0" max="50" step="1" required>
+                </div>
+
+                <!-- Gross weekly pay -->
+                <div class="form-group">
+                    <label for="gross-weekly">Gross weekly pay (£)</label>
+                    <span class="hint">Before tax, including regular overtime and bonuses</span>
+                    <input type="number" id="gross-weekly" placeholder="e.g. 600" min="0" step="0.01" required>
+                </div>
+
+                <!-- Net weekly pay -->
+                <div class="form-group">
+                    <label for="net-weekly">Net weekly pay (£)</label>
+                    <span class="hint">Take-home pay after tax and NI</span>
+                    <input type="number" id="net-weekly" placeholder="e.g. 480" min="0" step="0.01" required>
+                </div>
+
+                <!-- New job toggle -->
+                <div>
+                    <span class="toggle-label-text">Have you found a new job since?</span>
+                    <div class="toggle-group" id="newjob-toggle-group" role="radiogroup" aria-label="Found a new job?">
+                        <button class="toggle-btn" data-value="yes" aria-pressed="false">Yes</button>
+                        <button class="toggle-btn active" data-value="no" aria-pressed="true">No</button>
+                    </div>
+                </div>
+
+                <!-- Discrimination toggle -->
+                <div>
+                    <span class="toggle-label-text">Do you believe this involved discrimination?</span>
+                    <div class="toggle-group" id="discrim-toggle-group" role="radiogroup" aria-label="Involved discrimination?">
+                        <button class="toggle-btn" data-value="yes" aria-pressed="false">Yes</button>
+                        <button class="toggle-btn active" data-value="no" aria-pressed="true">No</button>
+                    </div>
+                </div>
+
+                <!-- Conditional: Severity dropdown -->
+                <div class="conditional-section" id="severity-section">
+                    <div class="conditional-section-inner">
+                        <div class="form-group">
+                            <label for="severity">Severity of discrimination</label>
+                            <select id="severity">
+                                <option value="lower">One-off minor incident</option>
+                                <option value="middle">Serious or continuing conduct</option>
+                                <option value="upper">Ongoing significant impact</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculate button -->
+                <button class="btn-calculate" id="btn-compensation" type="button">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    Calculate my estimate
+                </button>
+
+                <!-- Output area -->
+                <div class="output-area" id="compensation-output">
+                    <div class="output-inner" id="compensation-output-inner">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ═══════════════ INFO / SEO BLOCK ═══════════════ -->
+        <article class="info-block" id="guide">
+            <h2>Understanding Tribunal Deadlines and Compensation</h2>
+
+            <h3>How the 3-Month Limitation Period Works</h3>
+            <p>
+                In most UK employment tribunal claims — including unfair dismissal, constructive dismissal, and discrimination —
+                you have <strong>three months less one day</strong> from the date of dismissal (or the date of the act you are complaining about)
+                to submit your claim. For example, if you were dismissed on 15 January, your deadline would ordinarily fall on 14 April.
+                This tight timeframe catches many people off guard, which is why checking your deadline early is essential.
+            </p>
+
+            <h3>How ACAS Early Conciliation Affects Your Deadline</h3>
+            <p>
+                Before filing most tribunal claims, you must contact <strong>ACAS</strong> (the Advisory, Conciliation and Arbitration Service)
+                for early conciliation. This process effectively <strong>pauses the limitation clock</strong>. The period between the date
+                ACAS receives your conciliation notification and the date they issue your certificate is added back onto your deadline.
+                In practice, this means your final deadline may be <strong>several weeks later</strong> than the standard three-month
+                date. Always keep your ACAS certificate safe — it contains the key dates you will need.
+            </p>
+
+            <h3>Upcoming Changes: 2026 / 2027</h3>
+            <div class="highlight-note">
+                <strong>Important:</strong> Under proposed reforms in the Employment Rights Bill, the limitation period for tribunal
+                claims is expected to <strong>extend from 3 months to 6 months</strong>, and the ACAS early conciliation window will
+                also be lengthened. These changes are anticipated to take effect during 2026 or 2027. Until then, the current
+                3-month rule (with ACAS adjustments) remains in force. Always check the latest position before relying on any deadline.
+            </div>
+
+            <h3>Basic Award vs Compensatory Award vs Vento Bands</h3>
+            <p>Unfair dismissal compensation is made up of several components:</p>
+            <ul>
+                <li><strong>Basic Award</strong> — A formula-based statutory payment calculated from your age, length of service, and gross weekly pay (capped). It mirrors the statutory redundancy calculation: 0.5 week's pay per year under age 22, 1 week per year aged 22–40, and 1.5 weeks per year aged 41+.</li>
+                <li><strong>Compensatory Award</strong> — Designed to cover your actual financial loss (lost earnings, benefits, pension contributions). This is subject to a statutory cap (currently the lower of £105,707 or 52 weeks' gross pay for most claims). The estimate depends heavily on individual circumstances, including whether you have found new employment.</li>
+                <li><strong>Vento Bands</strong> — These apply specifically to <em>injury to feelings</em> in discrimination cases. They are split into three tiers: lower band (one-off or minor incidents), middle band (serious or continuing conduct), and upper band (ongoing significant impact). The bands are updated annually and are separate from — and in addition to — the basic and compensatory awards.</li>
+            </ul>
+            <p>
+                The total compensation in a discrimination case can therefore include <strong>all three elements</strong>,
+                potentially resulting in a significantly higher overall award. Our calculator provides a broad estimate;
+                for a detailed assessment tailored to your situation, speak with an employment law specialist.
+            </p>
+        </article>
+    </main>
+
+    <!-- ═══════════════ FOOTER ═══════════════ -->
+    <footer class="site-footer" id="footer-disclaimer">
+        <p>
+            <strong>Disclaimer:</strong> These calculators provide general estimates only and do not constitute legal advice.
+            Always confirm your specific circumstances with a qualified solicitor. Compensation figures, statutory caps,
+            and Vento bands are subject to annual revision. Tribunal deadlines are strictly enforced — do not rely solely
+            on this tool for time-critical decisions.
+        </p>
+    </footer>
+
+    <!-- ═══════════════ SCRIPTS ═══════════════ -->
+    <script>
+        (function() {
+            // ─────────────────────────────────────
+            // DOM REFERENCES
+            // ─────────────────────────────────────
+            // -- Deadline Calculator --
+            const dismissalDateInput = document.getElementById('dismissal-date');
+            const acasToggleGroup = document.getElementById('acas-toggle-group');
+            const acasDatesSection = document.getElementById('acas-dates-section');
+            const acasStartDateInput = document.getElementById('acas-start-date');
+            const acasCertDateInput = document.getElementById('acas-cert-date');
+            const btnDeadline = document.getElementById('btn-deadline');
+            const deadlineOutput = document.getElementById('deadline-output');
+            const deadlineHeadline = document.getElementById('deadline-headline');
+            const deadlineExplanation = document.getElementById('deadline-explanation');
+
+            // -- Compensation Calculator --
+            const ageInput = document.getElementById('age-dismissal');
+            const yearsServiceInput = document.getElementById('years-service');
+            const grossWeeklyInput = document.getElementById('gross-weekly');
+            const netWeeklyInput = document.getElementById('net-weekly');
+            const newJobToggleGroup = document.getElementById('newjob-toggle-group');
+            const discrimToggleGroup = document.getElementById('discrim-toggle-group');
+            const severitySection = document.getElementById('severity-section');
+            const severitySelect = document.getElementById('severity');
+            const btnCompensation = document.getElementById('btn-compensation');
+            const compensationOutput = document.getElementById('compensation-output');
+            const compensationOutputInner = document.getElementById('compensation-output-inner');
+
+            // ─────────────────────────────────────
+            // HELPER: Get active toggle value
+            // ─────────────────────────────────────
+            function getToggleValue(groupElement) {
+                const activeBtn = groupElement.querySelector('.toggle-btn.active');
+                return activeBtn ? activeBtn.getAttribute('data-value') : null;
+            }
+
+            // ─────────────────────────────────────
+            // HELPER: Set toggle value programmatically
+            // ─────────────────────────────────────
+            function setToggleValue(groupElement, value) {
+                const buttons = groupElement.querySelectorAll('.toggle-btn');
+                buttons.forEach(btn => {
+                    const isActive = btn.getAttribute('data-value') === value;
+                    btn.classList.toggle('active', isActive);
+                    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+                });
+            }
+
+            // ─────────────────────────────────────
+            // HELPER: Toggle conditional section
+            // ─────────────────────────────────────
+            function toggleConditionalSection(sectionElement, show) {
+                if (show) {
+                    sectionElement.classList.add('visible');
+                } else {
+                    sectionElement.classList.remove('visible');
+                }
+            }
+
+            // ─────────────────────────────────────
+            // HELPER: Format date as UK-style string
+            // ─────────────────────────────────────
+            function formatDateUK(dateObj) {
+                if (!dateObj || isNaN(dateObj.getTime())) return 'Invalid date';
+                const day = dateObj.getDate();
+                const month = dateObj.toLocaleDateString('en-GB', { month: 'long' });
+                const year = dateObj.getFullYear();
+                const suffix = (day === 1 || day === 21 || day === 31) ? 'st' :
+                    (day === 2 || day === 22) ? 'nd' :
+                    (day === 3 || day === 23) ? 'rd' : 'th';
+                return `${day}${suffix} ${month} ${year}`;
+            }
+
+            // ─────────────────────────────────────
+            // HELPER: Format currency
+            // ─────────────────────────────────────
+            function formatGBP(amount) {
+                return '£' + Math.round(amount).toLocaleString('en-GB');
+            }
+
+            function formatGBPRange(low, high) {
+                return formatGBP(low) + ' – ' + formatGBP(high);
+            }
+
+            // ─────────────────────────────────────
+            // PLACEHOLDER: calculateDeadline()
+            //
+            // This function provides a simplified estimate of
+            // the tribunal claim deadline. A production version
+            // should account for:
+            //   - Bank holidays (deadline shifts to next working day)
+            //   - The exact "3 months less 1 day" rule
+            //   - ACAS clock-stop rules (clock stops on notification
+            //     date, restarts on certificate date)
+            //   - The statutory minimum 1-month extension when ACAS
+            //     is contacted near or after the original deadline
+            //   - The upcoming 6-month limitation period (2026/2027)
+            // ─────────────────────────────────────
+            function calculateDeadline() {
+                const dismissalRaw = dismissalDateInput.value;
+                if (!dismissalRaw) {
+                    alert('Please enter the date of dismissal.');
+                    return;
+                }
+                const dismissalDate = new Date(dismissalRaw + 'T00:00:00');
+
+                const acasContacted = getToggleValue(acasToggleGroup) === 'yes';
+                let acasStartDate = null;
+                let acasCertDate = null;
+                let acasPeriodDays = 0;
+
+                if (acasContacted) {
+                    const startRaw = acasStartDateInput.value;
+                    const certRaw = acasCertDateInput.value;
+                    if (!startRaw || !certRaw) {
+                        alert('Please enter both ACAS conciliation dates, or select "No" if you did not contact ACAS.');
+                        return;
+                    }
+                    acasStartDate = new Date(startRaw + 'T00:00:00');
+                    acasCertDate = new Date(certRaw + 'T00:00:00');
+                    if (acasCertDate < acasStartDate) {
+                        alert('The ACAS certificate date must be on or after the conciliation start date.');
+                        return;
+                    }
+                    // Calculate ACAS period in days (inclusive of start, exclusive of cert)
+                    acasPeriodDays = Math.round((acasCertDate - acasStartDate) / (1000 * 60 * 60 * 24));
+                    if (acasPeriodDays < 0) acasPeriodDays = 0;
+                }
+
+                // --- Simplified deadline calculation ---
+                // Step 1: Base deadline = dismissal date + 3 months - 1 day
+                const baseDeadline = new Date(dismissalDate);
+                baseDeadline.setMonth(baseDeadline.getMonth() + 3);
+                baseDeadline.setDate(baseDeadline.getDate() - 1);
+
+                // Step 2: Add back ACAS period days
+                const adjustedDeadline = new Date(baseDeadline);
+                adjustedDeadline.setDate(adjustedDeadline.getDate() + acasPeriodDays);
+
+                // Step 3 (simplified safeguard): If ACAS was contacted, ensure at least
+                // 30 days from certificate date (this mirrors the statutory minimum)
+                let finalDeadline = adjustedDeadline;
+                if (acasContacted && acasCertDate) {
+                    const minDeadline = new Date(acasCertDate);
+                    minDeadline.setDate(minDeadline.getDate() + 30);
+                    if (finalDeadline < minDeadline) {
+                        finalDeadline = minDeadline;
+                    }
+                }
+
+                // --- Build explanation ---
+                let explanation = '';
+                const baseFormatted = formatDateUK(baseDeadline);
+                if (acasContacted && acasPeriodDays > 0) {
+                    explanation =
+                        `Standard deadline (3 months less 1 day): <strong>${baseFormatted}</strong>. ` +
+                        `ACAS early conciliation paused the clock for <strong>${acasPeriodDays} day${acasPeriodDays !== 1 ? 's' : ''}</strong> ` +
+                        `(${formatDateUK(acasStartDate)} to ${formatDateUK(acasCertDate)}), extending your deadline.`;
+                    if (finalDeadline.getTime() !== adjustedDeadline.getTime()) {
+                        explanation +=
+                            ` Additionally, the statutory minimum 1-month post-certificate period applied, ` +
+                            `giving you the final date shown.`;
+                    }
+                } else if (acasContacted && acasPeriodDays === 0) {
+                    explanation =
+                        `Standard deadline (3 months less 1 day): <strong>${baseFormatted}</strong>. ` +
+                        `ACAS was contacted but the conciliation period was negligible, so the deadline is unchanged.`;
+                } else {
+                    explanation =
+                        `Standard deadline (3 months less 1 day from dismissal): <strong>${baseFormatted}</strong>. ` +
+                        `No ACAS early conciliation extension applies.`;
+                }
+
+                // --- Update DOM ---
+                deadlineHeadline.innerHTML = `Your estimated deadline is <span class="date-highlight">${formatDateUK(finalDeadline)}</span>`;
+                deadlineExplanation.innerHTML = explanation;
+
+                // Smooth reveal
+                deadlineOutput.classList.add('visible');
+                // Scroll output into view smoothly
+                setTimeout(() => {
+                    deadlineOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 150);
+            }
+
+            // ─────────────────────────────────────
+            // PLACEHOLDER: calculateCompensation()
+            //
+            // This function provides a simplified estimate.
+            // A production version should account for:
+            //   - Precise statutory cap values (updated annually)
+            //   - Pension loss calculations
+            //   - ACAS uplift/reduction factors
+            //   - Polkey deductions
+            //   - Contributory fault reductions
+            //   - Recoupment regulations
+            //   - Regional variations
+            //   - The interaction between basic and compensatory caps
+            // ─────────────────────────────────────
+            function calculateCompensation() {
+                const age = parseInt(ageInput.value, 10);
+                const yearsService = parseInt(yearsServiceInput.value, 10);
+                const grossWeekly = parseFloat(grossWeeklyInput.value);
+                const netWeekly = parseFloat(netWeeklyInput.value);
+                const foundNewJob = getToggleValue(newJobToggleGroup) === 'yes';
+                const isDiscrimination = getToggleValue(discrimToggleGroup) === 'yes';
+                const severity = isDiscrimination ? severitySelect.value : null;
+
+                // --- Validation ---
+                if (isNaN(age) || age < 16 || age > 100) {
+                    alert('Please enter a valid age (16–100).');
+                    return;
+                }
+                if (isNaN(yearsService) || yearsService < 0) {
+                    alert('Please enter valid years of service.');
+                    return;
+                }
+                if (isNaN(grossWeekly) || grossWeekly < 0) {
+                    alert('Please enter a valid gross weekly pay.');
+                    return;
+                }
+                if (isNaN(netWeekly) || netWeekly < 0) {
+                    alert('Please enter a valid net weekly pay.');
+                    return;
+                }
+
+                // --- Caps (placeholder values — update annually) ---
+                const WEEKLY_PAY_CAP = 700; // Statutory cap on a week's pay (approx. 2025 figure)
+                const COMPENSATORY_CAP = 105707; // Statutory compensatory award cap (approx. 2025)
+                const MAX_SERVICE_YEARS = 20;
+
+                const cappedGrossWeekly = Math.min(grossWeekly, WEEKLY_PAY_CAP);
+                const cappedYears = Math.min(yearsService, MAX_SERVICE_YEARS);
+
+                // --- Basic Award ---
+                // Age-based multipliers:
+                //   Under 22:  0.5 × week's pay × years
+                //   22–40:     1.0 × week's pay × years
+                //   41+:       1.5 × week's pay × years
+                let basicAward = 0;
+                const serviceYears = cappedYears;
+                // We need to split years across age bands
+                // This is simplified: we assume the employee was at the given age
+                // for the entire service period. A full implementation would
+                // distribute years across age bands based on actual employment dates.
+                const ageAtStart = age - serviceYears;
+                let remainingYears = serviceYears;
+
+                // Years aged 41+
+                if (age > 40) {
+                    const yearsOver40 = Math.min(remainingYears, age - 40);
+                    basicAward += yearsOver40 * 1.5 * cappedGrossWeekly;
+                    remainingYears -= yearsOver40;
+                }
+                // Years aged 22–40
+                if (remainingYears > 0 && age > 21) {
+                    const yearsInMiddle = Math.min(remainingYears, Math.max(0, Math.min(age, 40) - Math.max(ageAtStart, 22)));
+                    // Simplified: use remaining years in 22-40 band
+                    const middleYears = Math.min(remainingYears, (age <= 40 ? remainingYears : Math.max(0, 40 - Math.max(ageAtStart, 22))));
+                    if (middleYears > 0) {
+                        basicAward += middleYears * 1.0 * cappedGrossWeekly;
+                        remainingYears -= middleYears;
+                    }
+                }
+                // Years under 22
+                if (remainingYears > 0) {
+                    basicAward += remainingYears * 0.5 * cappedGrossWeekly;
+                }
+                basicAward = Math.round(basicAward);
+
+                // --- Compensatory Award Estimate ---
+                // Rough proxy: estimated weeks of net pay lost
+                let estimatedWeeks;
+                if (foundNewJob) {
+                    estimatedWeeks = Math.min(26, Math.max(4, Math.round(yearsService * 2))); // 1–6 months
+                } else {
+                    estimatedWeeks = Math.min(52, Math.max(13, Math.round(yearsService * 4))); // 3–12 months
+                }
+                let compensatoryLow = Math.round(netWeekly * estimatedWeeks * 0.7);
+                let compensatoryHigh = Math.round(netWeekly * estimatedWeeks * 1.3);
+                // Apply statutory cap
+                compensatoryLow = Math.min(compensatoryLow, COMPENSATORY_CAP);
+                compensatoryHigh = Math.min(compensatoryHigh, COMPENSATORY_CAP);
+
+                // --- Vento Bands (discrimination injury to feelings) ---
+                // 2025 figures (approximate — update annually)
+                const ventoBands = {
+                    lower: { low: 1200, high: 11700, label: 'Lower Vento band (one-off/minor)' },
+                    middle: { low: 11700, high: 35200, label: 'Middle Vento band (serious/continuing)' },
+                    upper: { low: 35200, high: 58700, label: 'Upper Vento band (ongoing significant)' },
+                };
+                let ventoLow = 0;
+                let ventoHigh = 0;
+                let ventoLabel = '';
+                if (isDiscrimination && severity && ventoBands[severity]) {
+                    ventoLow = ventoBands[severity].low;
+                    ventoHigh = ventoBands[severity].high;
+                    ventoLabel = ventoBands[severity].label;
+                }
+
+                // --- Totals ---
+                const totalLow = basicAward + compensatoryLow + ventoLow;
+                const totalHigh = basicAward + compensatoryHigh + ventoHigh;
+
+                // --- Build output HTML ---
+                let html = '';
+                html += `<div class="output-figures">`;
+
+                // Basic Award row
+                html += `<div class="output-row">
+                    <span class="label">Basic Award (statutory formula)</span>
+                    <span class="value">${formatGBP(basicAward)}</span>
+                </div>`;
+
+                // Compensatory Award row
+                html += `<div class="output-row">
+                    <span class="label">Compensatory Award (estimated range)</span>
+                    <span class="value">${formatGBPRange(compensatoryLow, compensatoryHigh)}</span>
+                </div>`;
+
+                // Vento band row (if applicable)
+                if (isDiscrimination && ventoLow > 0) {
+                    html += `<div class="output-row">
+                        <span class="label">Injury to Feelings — ${ventoLabel}</span>
+                        <span class="value">${formatGBPRange(ventoLow, ventoHigh)}</span>
+                    </div>`;
+                }
+
+                // Total row
+                html += `<div class="output-row total-row">
+                    <span class="label">Total Estimated Range</span>
+                    <span class="value">${formatGBPRange(totalLow, totalHigh)}</span>
+                </div>`;
+
+                html += `</div>`;
+
+                // Additional context tags
+                let tagsHtml = '';
+                if (isDiscrimination) {
+                    tagsHtml += `<span class="output-tag">🏷️ Includes Vento band for injury to feelings</span> `;
+                }
+                if (foundNewJob) {
+                    tagsHtml += `<span class="output-tag">💼 New job factored in</span> `;
+                }
+                if (yearsService > MAX_SERVICE_YEARS) {
+                    tagsHtml += `<span class="output-tag">📌 Service capped at ${MAX_SERVICE_YEARS} years</span> `;
+                }
+                if (grossWeekly > WEEKLY_PAY_CAP) {
+                    tagsHtml += `<span class="output-tag">📌 Weekly pay capped at ${formatGBP(WEEKLY_PAY_CAP)}</span> `;
+                }
+                if (tagsHtml) {
+                    html += `<div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;">${tagsHtml}</div>`;
+                }
+
+                // Disclaimer
+                html += `<p class="output-disclaimer">This estimate is for guidance only. Actual awards depend on tribunal discretion, mitigation efforts, and specific case facts. Statutory caps and Vento bands are reviewed annually.</p>`;
+
+                // Update DOM
+                compensationOutputInner.innerHTML = html;
+                compensationOutput.classList.add('visible');
+
+                // Smooth scroll
+                setTimeout(() => {
+                    compensationOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }, 150);
+            }
+
+            // ─────────────────────────────────────
+            // EVENT: ACAS toggle
+            // ─────────────────────────────────────
+            acasToggleGroup.addEventListener('click', function(e) {
+                const btn = e.target.closest('.toggle-btn');
+                if (!btn) return;
+                const value = btn.getAttribute('data-value');
+                setToggleValue(acasToggleGroup, value);
+                toggleConditionalSection(acasDatesSection, value === 'yes');
+                // Clear output when inputs change
+                deadlineOutput.classList.remove('visible');
+            });
+
+            // ─────────────────────────────────────
+            // EVENT: New Job toggle
+            // ─────────────────────────────────────
+            newJobToggleGroup.addEventListener('click', function(e) {
+                const btn = e.target.closest('.toggle-btn');
+                if (!btn) return;
+                const value = btn.getAttribute('data-value');
+                setToggleValue(newJobToggleGroup, value);
+                compensationOutput.classList.remove('visible');
+            });
+
+            // ─────────────────────────────────────
+            // EVENT: Discrimination toggle
+            // ─────────────────────────────────────
+            discrimToggleGroup.addEventListener('click', function(e) {
+                const btn = e.target.closest('.toggle-btn');
+                if (!btn) return;
+                const value = btn.getAttribute('data-value');
+                setToggleValue(discrimToggleGroup, value);
+                toggleConditionalSection(severitySection, value === 'yes');
+                compensationOutput.classList.remove('visible');
+            });
+
+            // ─────────────────────────────────────
+            // EVENT: Calculate Deadline button
+            // ─────────────────────────────────────
+            btnDeadline.addEventListener('click', calculateDeadline);
+
+            // ─────────────────────────────────────
+            // EVENT: Calculate Compensation button
+            // ─────────────────────────────────────
+            btnCompensation.addEventListener('click', calculateCompensation);
+
+            // ─────────────────────────────────────
+            // Hide outputs when relevant inputs change
+            // ─────────────────────────────────────
+            dismissalDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
+            acasStartDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
+            acasCertDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
+
+            [ageInput, yearsServiceInput, grossWeeklyInput, netWeeklyInput, severitySelect].forEach(el => {
+                el.addEventListener('change', () => compensationOutput.classList.remove('visible'));
+                el.addEventListener('input', () => compensationOutput.classList.remove('visible'));
+            });
+
+            // ─────────────────────────────────────
+            // Initialise: ensure conditional sections
+            // match default toggle states on load
+            // ─────────────────────────────────────
+            toggleConditionalSection(acasDatesSection, getToggleValue(acasToggleGroup) === 'yes');
+            toggleConditionalSection(severitySection, getToggleValue(discrimToggleGroup) === 'yes');
+
+            console.log('✅ UK Employment Tribunal Calculators ready.');
+            console.log('📅 Deadline calculator — placeholder logic in calculateDeadline()');
+            console.log('💰 Compensation calculator — placeholder logic in calculateCompensation()');
+            console.log('⚠️  These functions contain simplified estimates. See comments in source for details.');
+        })();
+    </script>
+</body>
+</html>
