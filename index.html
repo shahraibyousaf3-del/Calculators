@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
@@ -241,6 +240,34 @@
         }
         .card-heading .icon-circle.comp-icon::before {
             content: '💰';
+        }
+
+        .step-section {
+            margin-bottom: 24px;
+            padding-top: 4px;
+        }
+        .step-heading {
+            font-size: 1.05rem;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            color: var(--text-primary);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .step-heading .step-number {
+            background: var(--accent-light);
+            color: var(--accent);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 700;
+            flex-shrink: 0;
         }
 
         .form-group {
@@ -654,55 +681,84 @@
 
         <div class="calculators-grid">
 
+            <!-- ╔══════════════════════════════════════╗ -->
+            <!-- ║  CALCULATOR 1 — Tribunal Deadline   ║ -->
+            <!-- ╚══════════════════════════════════════╝ -->
             <section class="calculator-card" id="deadline-calc" aria-labelledby="deadline-heading">
                 <h2 class="card-heading" id="deadline-heading">
                     <span class="icon-circle cal-icon" aria-hidden="true"></span>
                     Tribunal Deadline Calculator
                 </h2>
 
-                <div class="form-group">
-                    <label for="dismissal-date">Date of dismissal</label>
-                    <span class="hint">The effective date your employment ended</span>
-                    <input type="date" id="dismissal-date" required>
-                </div>
-
-                <div>
-                    <span class="toggle-label-text">Did you contact ACAS for early conciliation?</span>
-                    <div class="toggle-group" id="acas-toggle-group" role="radiogroup" aria-label="Did you contact ACAS?">
-                        <button class="toggle-btn" data-value="yes" aria-pressed="false">Yes</button>
-                        <button class="toggle-btn active" data-value="no" aria-pressed="true">No</button>
+                <!-- ═══ STEP 1 ═══ -->
+                <div class="step-section">
+                    <h3 class="step-heading">
+                        <span class="step-number">1</span> Step 1 — ACAS Notification Deadline
+                    </h3>
+                    <div class="form-group">
+                        <label for="event-date">Date of dismissal or act</label>
+                        <span class="hint">The earliest event date you are complaining about</span>
+                        <input type="date" id="event-date" required>
                     </div>
-                </div>
-
-                <div class="conditional-section" id="acas-dates-section">
-                    <div class="conditional-section-inner">
-                        <div class="form-group">
-                            <label for="acas-start-date">Date ACAS conciliation started</label>
-                            <span class="hint">The date you first contacted ACAS</span>
-                            <input type="date" id="acas-start-date">
-                        </div>
-                        <div class="form-group">
-                            <label for="acas-cert-date">Date ACAS issued your certificate</label>
-                            <span class="hint">The date on your ACAS early conciliation certificate</span>
-                            <input type="date" id="acas-cert-date">
+                    <button class="btn-calculate" id="btn-step1" type="button" style="margin-top:12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        Calculate notification deadline
+                    </button>
+                    <div class="output-area" id="step1-output">
+                        <div class="output-inner">
+                            <div class="output-headline" id="step1-headline"></div>
+                            <p class="output-disclaimer">You must notify ACAS before this date to preserve your right to claim. Always confirm with a solicitor.</p>
                         </div>
                     </div>
                 </div>
 
-                <button class="btn-calculate" id="btn-deadline" type="button">
-                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-                    Calculate my deadline
-                </button>
+                <!-- ═══ STEP 2 ═══ -->
+                <div class="step-section">
+                    <h3 class="step-heading">
+                        <span class="step-number">2</span> Step 2 — Tribunal Filing Deadline
+                    </h3>
+                    <p style="font-size:0.82rem; color:var(--text-muted); margin-bottom:14px;">Using the same event date and ACAS early conciliation details below.</p>
+                    <div>
+                        <span class="toggle-label-text">Did you contact ACAS for early conciliation?</span>
+                        <div class="toggle-group" id="acas-toggle-group" role="radiogroup" aria-label="Did you contact ACAS?">
+                            <button class="toggle-btn" data-value="yes" aria-pressed="false">Yes</button>
+                            <button class="toggle-btn active" data-value="no" aria-pressed="true">No</button>
+                        </div>
+                    </div>
 
-                <div class="output-area" id="deadline-output">
-                    <div class="output-inner">
-                        <div class="output-headline" id="deadline-headline"></div>
-                        <p class="output-explanation" id="deadline-explanation"></p>
-                        <p class="output-disclaimer">This is an estimate based on the information you provided. The actual deadline may vary. Always verify with a qualified solicitor.</p>
+                    <div class="conditional-section" id="acas-dates-section">
+                        <div class="conditional-section-inner">
+                            <div class="form-group">
+                                <label for="acas-start-date">Date ACAS conciliation started</label>
+                                <span class="hint">The date you first contacted ACAS</span>
+                                <input type="date" id="acas-start-date">
+                            </div>
+                            <div class="form-group">
+                                <label for="acas-cert-date">Date ACAS issued your certificate</label>
+                                <span class="hint">The date on your ACAS early conciliation certificate</span>
+                                <input type="date" id="acas-cert-date">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="btn-calculate" id="btn-deadline" type="button" style="margin-top:12px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                        Calculate filing deadline
+                    </button>
+
+                    <div class="output-area" id="deadline-output">
+                        <div class="output-inner">
+                            <div class="output-headline" id="deadline-headline"></div>
+                            <p class="output-explanation" id="deadline-explanation"></p>
+                            <p class="output-disclaimer">This is an estimate based on the information you provided. The actual deadline may vary. Always verify with a qualified solicitor.</p>
+                        </div>
                     </div>
                 </div>
             </section>
 
+            <!-- ╔══════════════════════════════════════════╗ -->
+            <!-- ║  CALCULATOR 2 — Compensation Estimate  ║ -->
+            <!-- ╚══════════════════════════════════════════╝ -->
             <section class="calculator-card" id="compensation-calc" aria-labelledby="comp-heading">
                 <h2 class="card-heading" id="comp-heading">
                     <span class="icon-circle comp-icon" aria-hidden="true"></span>
@@ -831,7 +887,15 @@
         (function() {
             window.scrollTo(0, 0);
 
-            const dismissalDateInput = document.getElementById('dismissal-date');
+            // ── State ────────────────────────────────
+            let step1Completed = false; // ensures step order
+
+            // ── DOM refs ──────────────────────────
+            const eventDateInput = document.getElementById('event-date');
+            const btnStep1 = document.getElementById('btn-step1');
+            const step1Output = document.getElementById('step1-output');
+            const step1Headline = document.getElementById('step1-headline');
+
             const acasToggleGroup = document.getElementById('acas-toggle-group');
             const acasDatesSection = document.getElementById('acas-dates-section');
             const acasStartDateInput = document.getElementById('acas-start-date');
@@ -853,6 +917,7 @@
             const compensationOutput = document.getElementById('compensation-output');
             const compensationOutputInner = document.getElementById('compensation-output-inner');
 
+            // ── Helpers ───────────────────────────
             function getToggleValue(groupElement) {
                 const activeBtn = groupElement.querySelector('.toggle-btn.active');
                 return activeBtn ? activeBtn.getAttribute('data-value') : null;
@@ -885,13 +950,39 @@
                 return formatGBP(low) + ' – ' + formatGBP(high);
             }
 
-            function calculateDeadline() {
-                const dismissalRaw = dismissalDateInput.value;
-                if (!dismissalRaw) {
-                    alert('Please enter the date of dismissal.');
+            // ── Shared base‑deadline calculation ──
+            function getBaseDeadline(eventDate) {
+                const base = new Date(eventDate);
+                base.setMonth(base.getMonth() + 3);
+                base.setDate(base.getDate() - 1);
+                return base;
+            }
+
+            // ── Step 1 ────────────────────────────
+            function calculateStep1() {
+                const eventRaw = eventDateInput.value;
+                if (!eventRaw) {
+                    alert('Please enter the event date.');
                     return;
                 }
-                const dismissalDate = new Date(dismissalRaw + 'T00:00:00');
+                const eventDate = new Date(eventRaw + 'T00:00:00');
+                const notificationDeadline = getBaseDeadline(eventDate);
+
+                step1Headline.innerHTML = `You must notify ACAS by <span class="date-highlight">${formatDateUK(notificationDeadline)}</span>`;
+                step1Output.classList.add('visible');
+                step1Completed = true;  // Step 1 has been successfully run
+                setTimeout(() => { step1Output.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
+            }
+
+            // ── Step 2 ────────────────────────────
+            function calculateStep2() {
+                if (!step1Completed || !eventDateInput.value) {
+                    alert('Please complete Step 1 first by entering the event date and calculating your ACAS notification deadline.');
+                    return;
+                }
+
+                const eventRaw = eventDateInput.value;
+                const eventDate = new Date(eventRaw + 'T00:00:00');
                 const acasContacted = getToggleValue(acasToggleGroup) === 'yes';
                 let acasStartDate = null;
                 let acasCertDate = null;
@@ -901,7 +992,7 @@
                     const startRaw = acasStartDateInput.value;
                     const certRaw = acasCertDateInput.value;
                     if (!startRaw || !certRaw) {
-                        alert('Please enter both ACAS conciliation dates, or select "No" if you did not contact ACAS.');
+                        alert('Please enter both ACAS conciliation dates, or select "No" for ACAS contact.');
                         return;
                     }
                     acasStartDate = new Date(startRaw + 'T00:00:00');
@@ -914,9 +1005,7 @@
                     if (acasPeriodDays < 0) acasPeriodDays = 0;
                 }
 
-                const baseDeadline = new Date(dismissalDate);
-                baseDeadline.setMonth(baseDeadline.getMonth() + 3);
-                baseDeadline.setDate(baseDeadline.getDate() - 1);
+                const baseDeadline = getBaseDeadline(eventDate); // shared logic
 
                 const adjustedDeadline = new Date(baseDeadline);
                 adjustedDeadline.setDate(adjustedDeadline.getDate() + acasPeriodDays);
@@ -940,15 +1029,16 @@
                 } else if (acasContacted && acasPeriodDays === 0) {
                     explanation = `Standard deadline (3 months less 1 day): <strong>${baseFormatted}</strong>. ACAS was contacted but the conciliation period was negligible, so the deadline is unchanged.`;
                 } else {
-                    explanation = `Standard deadline (3 months less 1 day from dismissal): <strong>${baseFormatted}</strong>. No ACAS early conciliation extension applies.`;
+                    explanation = `Standard deadline (3 months less 1 day from the event date): <strong>${baseFormatted}</strong>. No ACAS early conciliation extension applies.`;
                 }
 
-                deadlineHeadline.innerHTML = `Your estimated deadline is <span class="date-highlight">${formatDateUK(finalDeadline)}</span>`;
+                deadlineHeadline.innerHTML = `Your estimated filing deadline is <span class="date-highlight">${formatDateUK(finalDeadline)}</span>`;
                 deadlineExplanation.innerHTML = explanation;
                 deadlineOutput.classList.add('visible');
                 setTimeout(() => { deadlineOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             }
 
+            // ── Compensation (unchanged) ──────────
             function calculateCompensation() {
                 const age = parseInt(ageInput.value, 10);
                 const yearsService = parseInt(yearsServiceInput.value, 10);
@@ -1010,29 +1100,13 @@
                 const totalHigh = basicAward + compensatoryHigh + ventoHigh;
 
                 let html = '<div class="output-figures">';
-
-                html += `<div class="output-row">
-                    <span class="label">Basic Award (statutory formula)</span>
-                    <span class="value">${formatGBP(basicAward)}</span>
-                </div>`;
-
-                html += `<div class="output-row">
-                    <span class="label">Compensatory Award (rough indicative range only)</span>
-                    <span class="value">${formatGBPRange(compensatoryLow, compensatoryHigh)}</span>
-                </div>`;
+                html += `<div class="output-row"><span class="label">Basic Award (statutory formula)</span><span class="value">${formatGBP(basicAward)}</span></div>`;
+                html += `<div class="output-row"><span class="label">Compensatory Award (rough indicative range only)</span><span class="value">${formatGBPRange(compensatoryLow, compensatoryHigh)}</span></div>`;
                 html += `<p style="font-size:0.78rem;color:var(--text-muted);margin-top:-6px;margin-bottom:4px;">Indicative only — actual loss depends on individual circumstances and mitigation.</p>`;
-
                 if (isDiscrimination && ventoLow > 0) {
-                    html += `<div class="output-row">
-                        <span class="label">Injury to Feelings — ${ventoLabel}</span>
-                        <span class="value">${formatGBPRange(ventoLow, ventoHigh)}</span>
-                    </div>`;
+                    html += `<div class="output-row"><span class="label">Injury to Feelings — ${ventoLabel}</span><span class="value">${formatGBPRange(ventoLow, ventoHigh)}</span></div>`;
                 }
-
-                html += `<div class="output-row total-row">
-                    <span class="label">Total Estimated Range</span>
-                    <span class="value">${formatGBPRange(totalLow, totalHigh)}</span>
-                </div></div>`;
+                html += `<div class="output-row total-row"><span class="label">Total Estimated Range</span><span class="value">${formatGBPRange(totalLow, totalHigh)}</span></div></div>`;
 
                 let tagsHtml = '';
                 if (isDiscrimination) tagsHtml += '<span class="output-tag">🏷️ Includes Vento band</span> ';
@@ -1049,6 +1123,19 @@
                 setTimeout(() => { compensationOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             }
 
+            // ── Event listeners ───────────────────
+            btnStep1.addEventListener('click', calculateStep1);
+            btnDeadline.addEventListener('click', calculateStep2);
+            btnCompensation.addEventListener('click', calculateCompensation);
+
+            // Reset step order when event date changes
+            eventDateInput.addEventListener('change', () => {
+                step1Completed = false;
+                step1Output.classList.remove('visible');
+                deadlineOutput.classList.remove('visible');
+            });
+
+            // ACAS toggle & conditional
             acasToggleGroup.addEventListener('click', function(e) {
                 const btn = e.target.closest('.toggle-btn');
                 if (!btn) return;
@@ -1070,10 +1157,7 @@
                 compensationOutput.classList.remove('visible');
             });
 
-            btnDeadline.addEventListener('click', calculateDeadline);
-            btnCompensation.addEventListener('click', calculateCompensation);
-
-            dismissalDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
+            // Hide outputs on input change
             acasStartDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
             acasCertDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
             [ageInput, yearsServiceInput, grossWeeklyInput, netWeeklyInput, severitySelect].forEach(el => {
@@ -1081,6 +1165,7 @@
                 el.addEventListener('input', () => compensationOutput.classList.remove('visible'));
             });
 
+            // Initialise conditional sections
             toggleConditionalSection(acasDatesSection, getToggleValue(acasToggleGroup) === 'yes');
             toggleConditionalSection(severitySection, getToggleValue(discrimToggleGroup) === 'yes');
 
@@ -1089,4 +1174,3 @@
     </script>
 </body>
 </html>
-```
