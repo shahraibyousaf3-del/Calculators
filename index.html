@@ -466,7 +466,7 @@
             font-weight: 700;
             color: var(--text-primary);
             letter-spacing: -0.02em;
-            line-height: 1.2;
+            line-height: 1.5;
         }
         .output-headline .date-highlight {
             color: var(--accent);
@@ -474,6 +474,8 @@
             padding: 3px 10px;
             border-radius: 6px;
             white-space: nowrap;
+            display: inline-block;
+            margin: 2px 0;
         }
         .output-explanation {
             font-size: 0.9rem;
@@ -887,10 +889,8 @@
         (function() {
             window.scrollTo(0, 0);
 
-            // ── State ────────────────────────────────
-            let step1Completed = false; // ensures step order
+            let step1Completed = false;
 
-            // ── DOM refs ──────────────────────────
             const eventDateInput = document.getElementById('event-date');
             const btnStep1 = document.getElementById('btn-step1');
             const step1Output = document.getElementById('step1-output');
@@ -917,7 +917,6 @@
             const compensationOutput = document.getElementById('compensation-output');
             const compensationOutputInner = document.getElementById('compensation-output-inner');
 
-            // ── Helpers ───────────────────────────
             function getToggleValue(groupElement) {
                 const activeBtn = groupElement.querySelector('.toggle-btn.active');
                 return activeBtn ? activeBtn.getAttribute('data-value') : null;
@@ -950,7 +949,6 @@
                 return formatGBP(low) + ' – ' + formatGBP(high);
             }
 
-            // ── Shared base‑deadline calculation ──
             function getBaseDeadline(eventDate) {
                 const base = new Date(eventDate);
                 base.setMonth(base.getMonth() + 3);
@@ -958,7 +956,6 @@
                 return base;
             }
 
-            // ── Step 1 ────────────────────────────
             function calculateStep1() {
                 const eventRaw = eventDateInput.value;
                 if (!eventRaw) {
@@ -970,11 +967,10 @@
 
                 step1Headline.innerHTML = `You must notify ACAS by <span class="date-highlight">${formatDateUK(notificationDeadline)}</span>`;
                 step1Output.classList.add('visible');
-                step1Completed = true;  // Step 1 has been successfully run
+                step1Completed = true;
                 setTimeout(() => { step1Output.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             }
 
-            // ── Step 2 ────────────────────────────
             function calculateStep2() {
                 if (!step1Completed || !eventDateInput.value) {
                     alert('Please complete Step 1 first by entering the event date and calculating your ACAS notification deadline.');
@@ -1005,7 +1001,7 @@
                     if (acasPeriodDays < 0) acasPeriodDays = 0;
                 }
 
-                const baseDeadline = getBaseDeadline(eventDate); // shared logic
+                const baseDeadline = getBaseDeadline(eventDate);
 
                 const adjustedDeadline = new Date(baseDeadline);
                 adjustedDeadline.setDate(adjustedDeadline.getDate() + acasPeriodDays);
@@ -1038,7 +1034,6 @@
                 setTimeout(() => { deadlineOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             }
 
-            // ── Compensation (unchanged) ──────────
             function calculateCompensation() {
                 const age = parseInt(ageInput.value, 10);
                 const yearsService = parseInt(yearsServiceInput.value, 10);
@@ -1123,19 +1118,16 @@
                 setTimeout(() => { compensationOutput.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 100);
             }
 
-            // ── Event listeners ───────────────────
             btnStep1.addEventListener('click', calculateStep1);
             btnDeadline.addEventListener('click', calculateStep2);
             btnCompensation.addEventListener('click', calculateCompensation);
 
-            // Reset step order when event date changes
             eventDateInput.addEventListener('change', () => {
                 step1Completed = false;
                 step1Output.classList.remove('visible');
                 deadlineOutput.classList.remove('visible');
             });
 
-            // ACAS toggle & conditional
             acasToggleGroup.addEventListener('click', function(e) {
                 const btn = e.target.closest('.toggle-btn');
                 if (!btn) return;
@@ -1157,7 +1149,6 @@
                 compensationOutput.classList.remove('visible');
             });
 
-            // Hide outputs on input change
             acasStartDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
             acasCertDateInput.addEventListener('change', () => deadlineOutput.classList.remove('visible'));
             [ageInput, yearsServiceInput, grossWeeklyInput, netWeeklyInput, severitySelect].forEach(el => {
@@ -1165,7 +1156,6 @@
                 el.addEventListener('input', () => compensationOutput.classList.remove('visible'));
             });
 
-            // Initialise conditional sections
             toggleConditionalSection(acasDatesSection, getToggleValue(acasToggleGroup) === 'yes');
             toggleConditionalSection(severitySection, getToggleValue(discrimToggleGroup) === 'yes');
 
